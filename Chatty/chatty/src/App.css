@@ -41,7 +41,7 @@
   font-family: "Poppins", sans-serif;
   color: white;
   font-size: 20px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   background-color: white;
   outline: none;
   border: none;
@@ -93,29 +93,22 @@
   margin-right: 50px;
 }
 
-.button-cont {
+.mode-logo {
+  
+  height:70px ;
+  width:70px ;
+}
+
+.theme-button {
+  position:absolute; 
+  top:0px; 
+  left:0px ;
+  margin:20px; 
   display: flex;
-  justify-content: center;
-  margin-left: 50px;
-  margin-top: 30px;
-  align-items: center;
+  flex-direction: column;
 }
 
-.btn {
-  border: none;
-  background-color: white;
-  padding: 10px 40px;
-  border-radius: 20px;
-  outline: none;
-  color: rgb(109, 104, 104);
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
-}
 
-.btn:hover {
-  background-color: mediumseagreen;
-  color: white;
-}
 
 @media screen and (max-width: 500px) {
 
@@ -136,7 +129,7 @@
     justify-content: center;
   }
    
-  .logo { 
+  .logo {   
      height: 100px ;
      width:100px ;
   }
@@ -166,12 +159,30 @@
   .btnn {
     margin-right: 10px;
     padding:5px 15px ;
-    font-size:15px ;
+    font-size:20px ;
+    transition: 0.2s ease-in;
     
   }
 
-  .btnn:hover {
-    background-color: white;
+  .theme-button {
+    margin:10px ;
+    display:flex;
+    flex-direction: column;
+  }
+ 
+  .mode-logo {
+    height:50px ;
+    width:50px; 
+  }
+
+  .switch {
+      font-size:10px ;
+      height:5px; 
+      width:10px; 
+  }
+
+  .btnn:active{
+      transform: translateX(10px);
   }
 
 
