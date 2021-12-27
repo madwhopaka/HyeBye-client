@@ -4,18 +4,26 @@ import './index.css';
 import App from './App';
 import {Provider} from 'react-redux'; 
 import {configureStore} from "@reduxjs/toolkit";
-import themeReducer   from './reducers/theme.js' ; 
+import themeReducer   from './reducers/theme.js' ;
+import loadingReducer from './reducers/loading.js' ;  
+import userReducer from './reducers/user.js' ; 
+import {BrowserRouter as Router} from "react-router-dom" ; 
 
 const store = configureStore({
   reducer: {
     theme: themeReducer ,
+    load: loadingReducer , 
+    user: userReducer , 
+
   }
 }) ; 
 
 ReactDOM.render(
   <React.StrictMode>
    <Provider store = {store}>
+   <Router>
    <App />
+   </Router>
    </Provider>
   </React.StrictMode>,
   document.getElementById('root')

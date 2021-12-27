@@ -2,11 +2,16 @@ import React from 'react';
 import app_logo from "../images/output.gif";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {useSelector} from 'react-redux' ; 
+import {useNavigate} from 'react-router-dom'  ;
 
 function LandPage() {
   const theme =  useSelector(state => state.theme);
   console.log(theme.value.color) ; 
   console.log(theme.value.bgcolor) ; 
+  const nav  = useNavigate() ; 
+  const handleClick = ()=> {
+    nav('/login', {replace:true}) ; 
+  }
     return (
         <div className="center-div">
         <div className="logohead">
@@ -17,7 +22,7 @@ function LandPage() {
           </div>
         </div>
         <div className="btn-container">
-          <button className="btnn"> <p style = {{margin:0, padding: 0}}>Get in </p><ArrowForwardIosIcon className = "icon" sx = {{margin:0, padding:0}}/> </button>
+          <button className="btnn"> <p style = {{margin:0, padding: 0}} onClick = {handleClick}>Get in </p><ArrowForwardIosIcon className = "icon" sx = {{margin:0, padding:0}}/> </button>
         </div>
       </div>
     )
