@@ -11,6 +11,9 @@ import ThemeButton from "./components/ThemeButton";
 function App() {
   const theme =  useSelector(state => state.theme);
   console.log(theme.value.color) ; 
+  const body = document.body; 
+  body.style.background = theme.value.color ; 
+  body.style.color = theme.value.bgcolor ;
   console.log(theme.value.bgcolor) ;  
   return (
     <div className="App" style = {{backgroundColor:theme.value.color , color: theme.value.bgcolor}}>

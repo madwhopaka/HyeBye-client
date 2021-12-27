@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+ 
 }
 
 .center-div {
@@ -319,7 +320,13 @@ background-image: linear-gradient(159deg, #7f53ac 40%, #09c6f9 34%);
 }
 
 
-
+.normal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:0px; 
+  flex-direction: column; 
+}
 
 
 
@@ -478,12 +485,16 @@ background-image: linear-gradient(159deg, #7f53ac 40%, #09c6f9 34%);
 }
 
 
+
+
+
 @media screen and (max-width: 500px) {
 
   .App {
     width:100vw ; 
-    height:100vh ; 
-    overflow:hidden; 
+    height:80vh ;
+    overflow: hidden;
+   
   }
 
   
@@ -635,6 +646,7 @@ background-image: linear-gradient(159deg, #7f53ac 40%, #09c6f9 34%);
   }
 
   .join-room-component {
+    
     width: 330px ;
   }
 }

@@ -57,6 +57,10 @@ function Login() {
             }).catch((err)=> {
                 dispatch(setLoading({loadingvalue:false, loadingtext: ""}));
                 console.log(err) ; 
+                setError("Error from the server. Try Again.");
+                setTimeout(() => {
+                  setError("");
+                }, 3000);
             })
         }
         

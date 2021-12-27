@@ -26,6 +26,7 @@ function RoomPage(props) {
     const [joinPressed, toggleJoinPressed] = useState(false); 
     const [createPressed, toggleCreatePressed] = useState(false) ;
     const [code, setCode] = useState(''); 
+    const [error, setError] = useState('') ; 
     const nav = useNavigate() ; 
     useEffect(() => {
       setusername(user.value.username) ; 
@@ -37,14 +38,27 @@ function RoomPage(props) {
 
     const handleCreateRoom = async()=> {
      loaderDispatch(setLoading({loadingvalue:true,loadingtext:"Creating a new room for you...!"}));
+     const formdata = {
+         username: username, 
+     }
+     await axios.post(url, formdata).then((response)=>{
+        console.log(response); 
+        console.log(response.data); 
+        setCode(response.data.code)  ;
+       
+    }).catch((err)=> {
+        loaderDispatch(setLoading({loadingvalue:false, loadingtext: ""}));
+        console.log(err) ; 
+        setError("Error from the server. Try Again.");
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+    });
      setTimeout(() => {
          loaderDispatch(setLoading({loadingvalue:false, loadingtext:""})); 
          toggleCreatePressed(true) ; 
      }, 3000);
-     await axios.get(url).then((response)=>{
-         console.log(response.data); 
-         setCode(response.data.code)  ;
-     })
+     
     }
 
     const handleJoinRoom = async()=> {
@@ -54,9 +68,6 @@ function RoomPage(props) {
             toggleJoinPressed(true) ; 
         }, 3000);
        }
-
-    
-
     
 
    
@@ -75,6 +86,9 @@ function RoomPage(props) {
                 <button className='create-join-btn' onClick = {handleJoinRoom}>
                     Join Room
                 </button>
+                <div className='eror-div'>
+                    {error}
+                </div>
             </div>:<div>{createPressed?<CreateComp code = {code}/>: <JoinComp username = {username} />}</div>}
             <Loading text ="Creating a server for you"/>
             
@@ -96,7 +110,7 @@ function CreateComp(props) {
         loaderDispatch(setLoading({loadingvalue:true,loadingtext:"Entering the room..!"})); 
         setTimeout(() => {
             loaderDispatch(setLoading({loadingvalue:false, loadingtext:"Entering the room...!"})); 
-            nav(`/room/${props.code}`) ;
+            nav(`/room/${props.code}`, {replace:true}) ;
         }, 3000);
 
             
@@ -118,7 +132,7 @@ function CreateComp(props) {
            </button>
           {copyText? <p className= 'simpletext' style = {{marginLeft:10, fontSize:15}}>Code Copied</p> : <img src = {contentCopy} height = "30px" width= "30px" style = {{marginLeft:10, marginTop:3}} onClick = {handleCopyClick} /> }
           </div>
-           <p className = 'create-compo-text'>Tap on the button to enter room</p>
+           <p className = 'sub-title'>Tap on the button to enter room</p>
            <Loading  />
         </div>
     )
@@ -127,6 +141,7 @@ function CreateComp(props) {
 
 
 function JoinComp(props) {
+    const nav = useNavigate() ; 
     const [code, setCode] = useState('') ; 
     const [eror,setError] = useState('') ; 
     const loaderDispatch  = useDispatch() ; 
@@ -146,14 +161,30 @@ function JoinComp(props) {
         }
         else {
             loaderDispatch(setLoading({loadingvalue:true, loadingtext:"Validating the room"})); 
-           const response = await joinRoomApiCall(props.username,code)  ;
-           console.log(response) ; 
+           var response = await joinRoomApiCall(props.username,code)  ;
+           console.log(response);
             setTimeout(() => {
                 loaderDispatch(setLoading({loadingvalue:false, loadingtext:""}));
-                if (response!="Success") {
-                    setError(response) ;
+                if (response==="Success") {
+                    loaderDispatch(setLoading({loadingvalue:true, loadingtext:"Joining the room"}));
+                    setTimeout(() => {
+                        loaderDispatch(setLoading({loadingvalue:false, loadingtext:""}));
+                        nav(`/room/${code}`, {replace:true}) ;
+                    },1000);
                 }
-            }, 3000);
+                else if (typeof(response)==Object) {
+                    setError("Couldn't connect to the server."); 
+                    setTimeout(() => {
+                        setError("") ;  
+                    },2000);
+                }
+                else {
+                    setError("Room not found."); 
+                    setTimeout(() => {
+                        setError("") ;
+                    }, 2000);
+                }
+            },2000);
         }
         
     }

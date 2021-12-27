@@ -1,4 +1,4 @@
-import { rootShouldForwardProp } from '@mui/material/styles/styled';
+
 import axios from 'axios' ; 
 
 const host = 'http://192.168.0.105:8000' ; 
@@ -9,21 +9,26 @@ export default async function joinRoomApiCall (username, code) {
        username: username, 
        code : code  ,
    }
-
+  var returnState; 
    try{
     await axios.post(url,formdata).then((res)=>{
         console.log(res) ; 
-        if (res.data.error) {
-            return res.data.error; 
+        console.log(res.data.error); 
+         const error = res.data.error; 
+        if (res.data.error!='') {
+            returnState= error; 
         }
         else {
-            return "Success" ; 
+            const success = "Success" ; 
+            returnState  = success;  
         }
     });
    }
    catch(err) {
     console.log(err) ; 
-    return err; 
+    returnState = err ; 
    }
+
+   return returnState; 
 
 }
