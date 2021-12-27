@@ -18,7 +18,7 @@ import '../App.css' ;
 
 const host = 'http://192.168.0.105:8000' ; 
 const url  = `${host}/api/room/create` ; 
-
+let socket ; 
 function RoomPage(props) {
     const loaderDispatch = useDispatch() ; 
     const user = useSelector(state=>state.user) ; 
@@ -29,6 +29,8 @@ function RoomPage(props) {
     const [error, setError] = useState('') ; 
     const nav = useNavigate() ; 
     useEffect(() => {
+
+      socket = props.socket ; 
       setusername(user.value.username) ; 
       if (!user.value.username) {
                  nav('../login',{replace:true}); 
@@ -89,8 +91,8 @@ function RoomPage(props) {
                 <div className='eror-div'>
                     {error}
                 </div>
-            </div>:<div>{createPressed?<CreateComp code = {code}/>: <JoinComp username = {username} />}</div>}
-            <Loading text ="Creating a server for you"/>
+            </div>:<div>{createPressed?<CreateComp username = {username} code = {code}/>: <JoinComp username = {username} />}</div>}
+            <Loading />
             
         </div>
     )
@@ -102,14 +104,25 @@ export default RoomPage
 
 
 function CreateComp(props) {
-    
+    const setSocket  = useSelector(state =>state.socket) ; 
     const [copyText ,setCopyText] = useState(false) ; 
     const nav = useNavigate() ; 
     const loaderDispatch = useDispatch() ; 
+
+
+
+
     const handleJoinCreatedRoom = ()=> {
         loaderDispatch(setLoading({loadingvalue:true,loadingtext:"Entering the room..!"})); 
         setTimeout(() => {
             loaderDispatch(setLoading({loadingvalue:false, loadingtext:"Entering the room...!"})); 
+            const data = {
+                code : props.code , 
+                username: props.username
+            }
+            const socket = setSocket.socket ;
+            console.log(socket) ; 
+            
             nav(`/room/${props.code}`, {replace:true}) ;
         }, 3000);
 
