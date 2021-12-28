@@ -1,16 +1,7 @@
-import {createSlice} from '@reduxjs/toolkit' ; 
+import  io from 'socket.io-client' ; 
+import React from 'react';
+ 
+const CONNECTION_PORT  = 'localhost:8000/';
 
-
-
-const socketSlice = createSlice({
-    name:"socket" , 
-    initialState: {value: {socket:null}}, 
-    reducers : {
-        setSocket: (state,action)=> {
-                state.value = action.payload; 
-        }
-    }
-})
-
-export const {setSocket} = socketSlice.actions; 
-export default socketSlice.reducer ;
+export const socket = io.connect(CONNECTION_PORT);
+export const SocketContext = React.createContext();

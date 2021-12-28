@@ -7,15 +7,10 @@ import RoomPage from "./components/RoomPage";
 import JoinedRoom from "./components/JoinedRoom";
 import {Routes, Route} from "react-router-dom" ;
 import {useSelector} from 'react-redux' ; 
-import { setSocket } from "./reducers/socket";
 import {useDispatch} from 'react-redux' ; 
 import ThemeButton from "./components/ThemeButton";
-import  io from 'socket.io-client' ; 
+import {SocketContext, socket} from './reducers/socket.js' ;
 
-
- 
-const CONNECTION_PORT  = 'localhost:8000/';
-let socket; 
 
 
 function App() {
@@ -26,15 +21,10 @@ function App() {
   body.style.background = theme.value.color ; 
   body.style.color = theme.value.bgcolor ;
   console.log(theme.value.bgcolor) ;  
-  dispatch(setSocket(socket)) ; 
-  useEffect(() => {
-    socket = io(CONNECTION_PORT) ; 
-    return () => {
-      socket.disconnect() ;
-    }
-  }, [CONNECTION_PORT])
+  
   return (
     <div className="App" style = {{backgroundColor:theme.value.color , color: theme.value.bgcolor}}>
+     <SocketContext.Provider value={socket}>
     <ThemeButton/>
    <Routes>
      <Route path = '/' element = {<Ape  />} />
@@ -42,6 +32,7 @@ function App() {
      <Route path = 'room/:id' element = {<JoinedRoom socket = {socket}/>} />
      <Route path = '/login' element = {<Login /> } /> 
    </Routes>
+   </SocketContext.Provider>
    </div>
   );
 }
