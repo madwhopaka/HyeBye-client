@@ -13,7 +13,7 @@ import axios from 'axios' ;
 import '../App.css' ; 
 
 
-const host = 'http://192.168.0.105:8000' ; 
+const host = 'https://hybye-backend.herokuapp.com' ; 
 const url  = `${host}/api/username` ; 
 
 function Login() {
@@ -52,7 +52,7 @@ function Login() {
                 setTimeout(() => {
                     dispatch(setLoading({loadingvalue:false, loadingtext:""})); 
                     nav('/room' , {replace:true});
-                }, 3000);
+                }, 1000);
                 
             }).catch((err)=> {
                 dispatch(setLoading({loadingvalue:false, loadingtext: ""}));

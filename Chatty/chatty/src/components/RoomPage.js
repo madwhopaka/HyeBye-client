@@ -12,7 +12,7 @@ import CreateComp from './CreateComp.js' ;
 
 import JoinComp from './JoinPage.js' ; 
 import "../App.css";
-const host = "http://192.168.0.105:8000";
+const host = "https://hybye-backend.herokuapp.com";
 const url = `${host}/api/room/create`;
 function RoomPage() {
   const loaderDispatch = useDispatch();
@@ -54,12 +54,12 @@ function RoomPage() {
         setError("Error from the server. Try Again.");
         setTimeout(() => {
           setError("");
-        }, 3000);
+        }, 2000);
       });
     setTimeout(() => {
       loaderDispatch(setLoading({ loadingvalue: false, loadingtext: "" }));
       toggleCreatePressed(true);
-    }, 3000);
+    }, 2000);
   };
 
   const handleJoinRoom = async () => {
@@ -72,7 +72,7 @@ function RoomPage() {
     setTimeout(() => {
       loaderDispatch(setLoading({ loadingvalue: false, loadingtext: "" }));
       toggleJoinPressed(true);
-    }, 3000);
+    }, 2000);
   };
 
   return (

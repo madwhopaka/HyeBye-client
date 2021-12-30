@@ -34,7 +34,7 @@ function Chat(props) {
         setTimeout(() => {
             dispatch(setLoading({loadingvalue:false, loadingtext:""}));
             nav('/');
-        }, 1000);
+        }, 3000);
       })
 
         const data = {
@@ -117,7 +117,6 @@ function Chat(props) {
     return (
       
       <div className='outer-container'>
-          <ThemeButton />
           <div className= 'chat-container'>
             Room Code :   {roomcode.value.code}
             <div  className='chat-messages'>

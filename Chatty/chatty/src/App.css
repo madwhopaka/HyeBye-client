@@ -96,8 +96,8 @@
 
 .mode-logo {
   
-  height:70px ;
-  width:70px ;
+  height:50px ;
+  width:50px ;
 }
 
 .theme-button {
@@ -648,5 +648,13 @@ background-image: linear-gradient(159deg, #7f53ac 40%, #09c6f9 34%);
   .join-room-component {
     
     width: 330px ;
+  }
+
+  .normal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:0px; 
+    flex-direction: column; 
   }
 }
