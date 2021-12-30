@@ -28,7 +28,7 @@ export default function CreateComp(props) {
         );
         nav(`/room/${savedCode.value.code}`, { replace: true });
     
-      }, 3000);
+      }, 2000);
     };
   
     const handleCopyClick = () => {
@@ -37,7 +37,7 @@ export default function CreateComp(props) {
       setCopyText(true);
       setTimeout(() => {
         setCopyText(false);
-      }, 3000);
+      }, 2000);
     };
     return (
       <div className="createroom-comp">

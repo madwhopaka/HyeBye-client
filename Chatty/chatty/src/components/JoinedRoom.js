@@ -24,7 +24,6 @@ function JoinedRoom() {
     const leaveRoom = ()=> {
       
         
-
         dispatch(setLoading({loadingvalue:true, loadingtext:"Leaving the rooom"})); 
         setTimeout(() => {
         dispatch(setLoading({loadingvalue:false, loadingtext:"Leaving the rooom"})); 

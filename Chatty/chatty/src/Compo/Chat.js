@@ -1,5 +1,5 @@
 import React from 'react'
-import './.css'  ;
+import './chat.css'  ;
 import { useState,useEffect,useContext,createRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -48,7 +48,7 @@ function Chat(props) {
          return () => {
             dispatch(userChange({username:''})) ; 
             dispatch(setCode({code:''})) ; 
-            socket.disconnect() ; 
+           
             
 
          }
@@ -76,9 +76,7 @@ function Chat(props) {
             });
     
         
-        return () => {
-            socket.disconnect() ; 
-        }
+       
     }, [socket])
 
     const handleSubmit = (e)=> {
