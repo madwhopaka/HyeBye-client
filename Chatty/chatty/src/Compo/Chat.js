@@ -22,7 +22,7 @@ function Chat(props) {
     console.log(bagcolor) ;
     const messagebox = createRef()  ;
     const [messageList, setMessagesList] = useState([]) ; 
-    const chatMessages = React.createRef() ; 
+
     const user = useSelector(state => state.user);
     const roomcode = useSelector(state=>state.code) ; 
 
