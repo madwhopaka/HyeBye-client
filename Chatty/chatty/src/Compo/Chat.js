@@ -28,7 +28,7 @@ function Chat(props) {
 
     const dispatch  = useDispatch() ; 
      useEffect(() => {
-        
+      
       socket.on('disconnect', ()=> {
         dispatch(setLoading({loadingvalue:true, loadingtext:"You are dissconnected from the server"})); 
         setTimeout(() => {
@@ -115,15 +115,13 @@ function Chat(props) {
 
 
     return (
-        
+      
       <div className='outer-container'>
           <ThemeButton />
           <div className= 'chat-container'>
-            Room Code :  4oisdslfiw
+            Room Code :   {roomcode.value.code}
             <div  className='chat-messages'>
-                <div className='left'>
-                <div className= "messageBox" style = {{background:bagcolor}}>Hey whatsup</div>
-                </div>     
+                   
 
                 {messageList.map(function(message, idx){    
          return (<div style = {{marginRight:"10px"}} key = {idx} className = {message.side}>
@@ -145,6 +143,7 @@ function Chat(props) {
       </div>
       <Loading />
       </div>
+
            
     )
 }

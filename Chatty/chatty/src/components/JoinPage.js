@@ -48,7 +48,7 @@ function JoinComp() {
             
               console.log(roomcode) ;
               codeDispatch(setCode({code:roomcode})) ;
-              // socket.emit('join-room', data) ; 
+            
               nav(`/room/${roomcode}`, { replace: true });
             }, 1000);
           } else if (typeof response == Object) {

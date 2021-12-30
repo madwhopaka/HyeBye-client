@@ -9,6 +9,7 @@ import { setLoading } from "../reducers/loading";
 import { setCode } from "../reducers/code";
 import Loading from "./Loading";
 import CreateComp from './CreateComp.js' ; 
+
 import JoinComp from './JoinPage.js' ; 
 import "../App.css";
 const host = "http://192.168.0.105:8000";
@@ -75,6 +76,7 @@ function RoomPage() {
   };
 
   return (
+   
     <div
       style={{
         display: "flex",
@@ -137,6 +139,7 @@ function RoomPage() {
       )}
       <Loading />
     </div>
+   
   );
 }
 
