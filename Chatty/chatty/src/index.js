@@ -7,10 +7,12 @@ import {configureStore} from "@reduxjs/toolkit";
 import themeReducer   from './reducers/theme.js' ;
 import loadingReducer from './reducers/loading.js' ;  
 import userReducer from './reducers/user.js' ; 
+import codeReducer from './reducers/code.js' ; 
 import {BrowserRouter as Router} from "react-router-dom" ; 
 
 const store = configureStore({
   reducer: {
+    code: codeReducer , 
     theme: themeReducer ,
     load: loadingReducer , 
     user: userReducer , 

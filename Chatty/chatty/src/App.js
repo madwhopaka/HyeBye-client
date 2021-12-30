@@ -10,6 +10,7 @@ import {useSelector} from 'react-redux' ;
 import {useDispatch} from 'react-redux' ; 
 import ThemeButton from "./components/ThemeButton";
 import {SocketContext, socket} from './reducers/socket.js' ;
+import Chat from './Compo/Chat.js' ; 
 
 
 
@@ -24,15 +25,15 @@ function App() {
   
   return (
     <div className="App" style = {{backgroundColor:theme.value.color , color: theme.value.bgcolor}}>
-     <SocketContext.Provider value={socket}>
-    <ThemeButton/>
-   <Routes>
-     <Route path = '/' element = {<Ape  />} />
-     <Route path = '/room' element = {<RoomPage socket = {socket} />} />
-     <Route path = 'room/:id' element = {<JoinedRoom socket = {socket}/>} />
-     <Route path = '/login' element = {<Login /> } /> 
-   </Routes>
-   </SocketContext.Provider>
+      <SocketContext.Provider value = {socket} > 
+      <ThemeButton/>
+<Routes>
+ <Route path = '/' element = {<Ape  />} />
+ <Route path = '/room' element = {<RoomPage socket = {socket} />} />
+ <Route path = 'room/:id' element = {<JoinedRoom socket = {socket}/>} />
+ <Route path = '/login' element = {<Login /> } /> 
+</Routes>
+       </SocketContext.Provider>
    </div>
   );
 }
@@ -40,4 +41,12 @@ function App() {
 export default App;
 
 
- 
+{/* <SocketContext.Provider value={socket}>
+<ThemeButton/>
+<Routes>
+ <Route path = '/' element = {<Ape  />} />
+ <Route path = '/room' element = {<RoomPage socket = {socket} />} />
+ <Route path = 'room/:id' element = {<JoinedRoom socket = {socket}/>} />
+ <Route path = '/login' element = {<Login /> } /> 
+</Routes>
+</SocketContext.Provider> */}
