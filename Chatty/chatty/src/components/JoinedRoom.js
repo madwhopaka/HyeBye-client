@@ -16,7 +16,7 @@ function JoinedRoom() {
         setUserName(user.value.username);
         if (!user.value.username && !roomcode.value.code) {
            
-            nav("/", { replace: true });
+            nav("/login", { replace: true });
           }
         return () => {
             
@@ -25,19 +25,15 @@ function JoinedRoom() {
 
     
     const leaveRoom = ()=> {
-      
-        
         dispatch(setLoading({loadingvalue:true, loadingtext:"Leaving the rooom"})); 
         setTimeout(() => {
         dispatch(setLoading({loadingvalue:false, loadingtext:"Leaving the rooom"})); 
-        socket.emit('leaving');
-        nav('/', {replace:true}); 
+        socket.emit('leaving') ; 
+        nav('/login', {replace:true}); 
         }, 1500);
     }
 
-    useEffect(() => {
-      
-    }) ;  
+
     return (
         <div className='normal-container'>
             <Chat />

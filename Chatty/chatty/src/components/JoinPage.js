@@ -49,7 +49,7 @@ function JoinComp() {
               console.log(roomcode) ;
               codeDispatch(setCode({code:roomcode})) ;
             
-              nav(`/room/${roomcode}`, { replace: true });
+              nav(`/room/${roomcode}`, { replace: false });
             }, 1000);
           } else if (typeof response == Object) {
             setError("Couldn't connect to the server.");

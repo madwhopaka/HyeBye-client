@@ -22,41 +22,58 @@ function Chat(props) {
     console.log(bagcolor) ;
     const messagebox = createRef()  ;
     const [messageList, setMessagesList] = useState([]) ; 
+    const [userCount, setUserCount] = useState(0) ; 
 
     const user = useSelector(state => state.user);
     const roomcode = useSelector(state=>state.code) ; 
-
     const dispatch  = useDispatch() ; 
+
+    
+
+
+
+    const handleTabClosing = ()=> { 
+        socket.emit("leaving")  ;
+    }
      useEffect(() => {
-      
-      socket.on('disconnect', ()=> {
-        dispatch(setLoading({loadingvalue:true, loadingtext:"You are dissconnected from the server"})); 
-        setTimeout(() => {
-            dispatch(setLoading({loadingvalue:false, loadingtext:""}));
-            nav('/');
-        }, 3000);
-      })
-
-        const data = {
-            code: roomcode.value.code,
-            username: user.value.username,
-          };
-        console.log(socket.connected) ; 
-        console.log(data) ;
-        socket.emit('join-room', data); 
-
-         return () => {
+        
+        window.addEventListener('beforeunload', handleTabClosing);
+        return () => {
+            
+            window.removeEventListener('beforeunload', handleTabClosing);
             dispatch(userChange({username:''})) ; 
             dispatch(setCode({code:''})) ; 
-           
-            
+            // socket.emit('leaving');
+        }
 
-         }
-     }, [CONNECTION_PORT,socket]);
 
-     
-    useEffect(() => {
+      
+      },[CONNECTION_PORT, socket]);
+
+
+
+    //   socket.on('disconnect', ()=> {
+    //     dispatch(setLoading({loadingvalue:true, loadingtext:"You are disconnected from the server"})); 
+    //     setTimeout(() => {
+    //         dispatch(setLoading({loadingvalue:false, loadingtext:""}));
+    //         nav('/login', {replace:true});
+    //     }, 2000);
+
        
+   const   data =  { 
+        username  : user.value.username, 
+        code    : roomcode.value.code, 
+    }
+     
+
+    useEffect(() => {
+
+    socket.emit('join-room', data); 
+
+       
+        socket.on('updateCount', (payload)=> {
+            setUserCount(payload) ; 
+        })
 
         socket.on('receive_message', (data)=> {
             console.log(data) ; 
@@ -71,7 +88,8 @@ function Chat(props) {
          });
         
         socket.on("leave", (payload) => {
-            console.log(payload)
+            console.log(payload);
+            setUserCount(payload.count) ; 
             setMessagesList((list)=> [...list,payload]);
             });
     
@@ -88,8 +106,7 @@ function Chat(props) {
                 from : 'you' ,
                 color: bagcolor, 
             }
-            const username = localStorage.getItem("username"); 
-            const code = localStorage.getItem("code") ; 
+ 
             const senderData = {
                 message: mess, 
                 side: 'left', 
@@ -115,8 +132,11 @@ function Chat(props) {
     return (
       
       <div className='outer-container'>
-          <div className= 'chat-container'>
-            Room Code :   {roomcode.value.code}
+          <div className= 'chat-container' >
+           <div style = {{display:"flex", justifyContent:"space-between", textAlign:"center"}}>
+           <p style = {{marginRight:"10px"}}> Room Code :   {roomcode.value.code} </p>
+           <p>Count: {userCount} </p>
+           </div>
             <div  className='chat-messages'>
                    
 

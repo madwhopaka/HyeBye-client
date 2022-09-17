@@ -51,7 +51,7 @@ function Login() {
                 dispatch(userChange({username:response.username})); 
                 setTimeout(() => {
                     dispatch(setLoading({loadingvalue:false, loadingtext:""})); 
-                    nav('/room' , {replace:true});
+                    nav('/room');
                 }, 1000);
                 
             }).catch((err)=> {

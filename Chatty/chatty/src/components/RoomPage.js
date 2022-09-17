@@ -26,7 +26,7 @@ function RoomPage() {
   useEffect(() => {
     setusername(user.value.username);
     if (!user.value.username) {
-      nav("/", { replace: true });
+      nav("/login", {replace:true});
     }
   }, [user]);
 

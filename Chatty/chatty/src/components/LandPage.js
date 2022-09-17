@@ -10,7 +10,7 @@ function LandPage() {
   console.log(theme.value.bgcolor) ; 
   const nav  = useNavigate() ; 
   const handleClick = ()=> {
-    nav('/login', {replace:true}) ; 
+    nav('/login') ; 
   }
     return (
         <div className="center-div">
