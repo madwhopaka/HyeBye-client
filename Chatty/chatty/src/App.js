@@ -16,6 +16,7 @@ function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
   console.log(theme.value.color);
+  console.log(socket); 
   const body = document.body;
   body.style.background = theme.value.color;
   body.style.color = theme.value.bgcolor;
