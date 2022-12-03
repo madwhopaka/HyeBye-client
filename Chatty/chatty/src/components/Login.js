@@ -13,7 +13,7 @@ import axios from 'axios' ;
 import '../App.css' ; 
 
 
-const host = 'https://hybye-backend.herokuapp.com' ; 
+const host = 'https://hybye-backend-production.up.railway.app' ; 
 const url  = `${host}/api/username` ; 
 
 function Login() {
