@@ -1,7 +1,7 @@
 
 import axios from 'axios' ; 
 
-const host = 'https://hybye-backend.herokuapp.com' ; 
+const host = 'https://hybye-backend-production.up.railway.app/' ; 
 const url  = `${host}/api/room/validate` ; 
 
 export default async function joinRoomApiCall (username, code) {
