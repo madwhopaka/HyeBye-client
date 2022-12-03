@@ -12,7 +12,7 @@ import CreateComp from './CreateComp.js' ;
 
 import JoinComp from './JoinPage.js' ; 
 import "../App.css";
-const host = "https://hybye-backend-production.up.railway.app/";
+const host = "https://hybye-backend-production.up.railway.app";
 const url = `${host}/api/room/create`;
 function RoomPage() {
   const loaderDispatch = useDispatch();
