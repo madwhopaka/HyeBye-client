@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "https://hye-bye-backend.onrender.com/";
+const host = "https://hye-bye-backend.onrender.com";
 const url = `${host}/api/room/validate`;
 
 export default async function joinRoomApiCall(username, code) {
