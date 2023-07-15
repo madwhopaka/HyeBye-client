@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import avatar from "../images/avatar.png";
 import { useSelector } from "react-redux";
@@ -8,15 +8,15 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "../reducers/loading";
 import { setCode } from "../reducers/code";
 import Loading from "./Loading";
-import CreateComp from './CreateComp.js' ; 
+import CreateComp from "./CreateComp.js";
 
-import JoinComp from './JoinPage.js' ; 
+import JoinComp from "./JoinPage.js";
 import "../App.css";
-const host = "https://hybye-backend-production.up.railway.app";
+const host = "https://hye-bye-backend.onrender.com";
 const url = `${host}/api/room/create`;
 function RoomPage() {
   const loaderDispatch = useDispatch();
-  const codeDispatch  = useDispatch() ; 
+  const codeDispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [username, setusername] = useState("");
   const [joinPressed, toggleJoinPressed] = useState(false);
@@ -26,7 +26,7 @@ function RoomPage() {
   useEffect(() => {
     setusername(user.value.username);
     if (!user.value.username) {
-      nav("/login", {replace:true});
+      nav("/login", { replace: true });
     }
   }, [user]);
 
@@ -45,8 +45,7 @@ function RoomPage() {
       .then((response) => {
         console.log(response);
         console.log(response.data);
-        codeDispatch(setCode({code:response.data.code})) ; 
-        
+        codeDispatch(setCode({ code: response.data.code }));
       })
       .catch((err) => {
         loaderDispatch(setLoading({ loadingvalue: false, loadingtext: "" }));
@@ -76,7 +75,6 @@ function RoomPage() {
   };
 
   return (
-   
     <div
       style={{
         display: "flex",
@@ -130,31 +128,12 @@ function RoomPage() {
         </div>
       ) : (
         <div>
-          {createPressed ? (
-            <CreateComp />
-          ) : (
-            <JoinComp username={username} />
-          )}
+          {createPressed ? <CreateComp /> : <JoinComp username={username} />}
         </div>
       )}
       <Loading />
     </div>
-   
   );
 }
 
 export default RoomPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
